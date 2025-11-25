@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+
+# pytest cache
+.pytest_cache/
+
+# IDE files
+.vscode/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Chrome temp profiles
+chrome-data/
