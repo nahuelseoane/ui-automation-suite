@@ -35,4 +35,9 @@ class BasePage:
             alert.accept()
         except NoAlertPresentException:
             pass
+
+    def type(self, locator, text):
+        element = self.find(locator)
+        element.clear()
+        element.send_keys(text)
         

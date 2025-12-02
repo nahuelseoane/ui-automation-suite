@@ -21,3 +21,7 @@ venv/
 
 # Chrome temp profiles
 chrome-data/
+
+# Allure
+allure-results/
+allure-report/
