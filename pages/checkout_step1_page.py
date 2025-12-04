@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -8,13 +9,16 @@ class CheckoutStepOnePage(BasePage):
     ZIP_INPUT = (By.ID, "postal-code")
     CONTINUE_BTN = (By.ID, "continue")
 
+    @allure.step("Verifying checkout step one is loaded")
     def is_loaded(self):
         self.find(self.FIRST_NAME_INPUT)
 
+    @allure.step("Filling checkout information: {first} {last}, ZIP: {zip_code}")
     def fill_info(self, first, last, zip_code):
-        self.type(self.FIRST_NAME_INPUT, first)
-        self.type(self.LAST_NAME_INPUT, last)
-        self.type(self.ZIP_INPUT, zip_code)
+        self.write(self.FIRST_NAME_INPUT, first)
+        self.write(self.LAST_NAME_INPUT, last)
+        self.write(self.ZIP_INPUT, zip_code)
 
+    @allure.step("Continuing to checkout step two")
     def continue_checkout(self):
         self.click(self.CONTINUE_BTN)

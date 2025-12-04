@@ -1,3 +1,4 @@
+import allure
 from pages.cart_page import CartPage
 from pages.checkout_complete_page import CheckoutCompletePage
 from pages.checkout_step1_page import CheckoutStepOnePage
@@ -5,7 +6,8 @@ from pages.checkout_step2_page import CheckoutStepTwoPage
 from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
 
-
+@allure.feature("Checkout")
+@allure.story("Complete Purchase Flow")
 def test_checkout_flow(driver):
     # Login
     login = LoginPage(driver)

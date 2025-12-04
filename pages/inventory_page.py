@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
 
@@ -9,12 +10,15 @@ class InventoryPage(BasePage):
     CART_BADGE = (By.CSS_SELECTOR, "span.shopping_cart_badge")
     CART_LINK = (By.CLASS_NAME, "shopping_cart_link")
 
+    @allure.step("Verifying inventory page loaded") 
     def is_loaded(self):
         return self.find(self.INVENTORY_CONTAINER)
 
+    @allure.step("Adding backpack to cart")
     def add_backpack_to_cart(self):
         self.click(self.ADD_BACKPACK_BTN)
 
+    @allure.step("Removing backpack from cart")
     def remove_backpack_from_cart(self):
         import time
         time.sleep(2)
@@ -26,6 +30,7 @@ class InventoryPage(BasePage):
         except:
             return 0
     
+    @allure.step("Opening shopping cart")
     def go_to_cart(self):
         self.click(self.CART_LINK)
         

@@ -1,6 +1,7 @@
 import os
-import pickle
 import shutil
+import allure
+from allure_commons.types import AttachmentType
 import pytest
 import tempfile
 from selenium import webdriver
@@ -15,7 +16,7 @@ def driver():
     user_data_dir = os.path.join(temp_dir, "chrome-data")
     options = Options()
     
-    # options.add_argument("--headless=new")
+    options.add_argument("--headless=new")
     options.add_argument("--incognito")
 
     options.add_argument(f"--user-data-dir={user_data_dir}")
@@ -46,3 +47,18 @@ def driver():
     yield driver
     driver.quit()
     shutil.rmtree(temp_dir, ignore_errors=True)
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    result = outcome.get_result()
+
+    if result.when == "call" and result.failed:
+        driver = item.funcargs.get("driver")
+        if driver:
+            allure.attach(
+                driver.get_screenshot_as_png(),
+                name="screenshot_on_failure",
+                attachment_type=AttachmentType.PNG
+            )
